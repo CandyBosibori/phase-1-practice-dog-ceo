@@ -21,3 +21,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       })
       .catch(error => console.error("Error fetching dog images:", error));
+
+      fetch(breedUrl)
+      .then(response => response.json())
+      .then(data => {
+        const breeds = Object.keys(data.message);
+       
+       const dogBreedsList = document.getElementById('dog-breeds')
+        // Iterate through the breeds and add them to the <ul> element
+        breeds.forEach(breed => {
+          const breedItem = document.createElement("li");
+          breedItem.innerText = breed;
+          breedItem.addEventListener("click", (event) => {
+
+            event.target.style.color = "red"; 
+          });
+
+          dogBreedsList.appendChild(breedItem);
+
+          
+        });
+      })
+      .catch(error => console.error("Error fetching dog breeds:", error));
+  });
